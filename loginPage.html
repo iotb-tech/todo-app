@@ -9,14 +9,17 @@
   <body
     class="m-0 p-5 pt-0 box-border bg-[#E8E8E8] lg:grid lg:grid-cols-2 lg:pt-10"
   >
-    <div></div>
-    <div>
-      <h2 class="text-center text-4xl font-bold font-sans lg:text-[3rem]">
-        Welcome Back, <span id="user-name"></span>!
+    <div class="flex justify-center">
+      <img src="public/login image.png" alt="Login image" />
+    </div>
+
+    <div class="lg:ml-20 lg:mr-5 lg:mt-20">
+      <h2 class="text-center text-4xl mb-3 font-bold font-sans lg:text-[3rem]">
+        Welcome Back !
       </h2>
       <input
         required
-        class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-3xl bg-white text-sm accent-purple-700"
+        class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
         type="email"
         name="email"
         id="email-input"
@@ -24,7 +27,7 @@
       /><br />
       <input
         required
-        class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-3xl bg-white text-sm accent-purple-700"
+        class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
         type="password"
         name="password"
         id="password-input"
@@ -37,7 +40,11 @@
       </button>
       <p class="text-center mt-2 text-gray-500 text-sm">
         Don't have an account?
-        <a class="text-[#693382] underline lg:font-bold" href="#">Signup</a>
+        <a
+          class="text-[#693382] underline lg:font-bold"
+          href="registerPage.html"
+          >Signup</a
+        >
       </p>
     </div>
   </body>
