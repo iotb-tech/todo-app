@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Todo Web Application | Login Page</title>
+  </head>
+  <body
+    class="m-0 p-5 pt-0 box-border bg-[#E8E8E8] lg:grid lg:grid-cols-2 lg:pt-10"
+  >
+    <div></div>
+    <div>
+      <h2 class="text-center text-4xl font-bold font-sans lg:text-[3rem]">
+        Welcome Back, <span id="user-name"></span>!
+      </h2>
+      <input
+        required
+        class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-3xl bg-white text-sm accent-purple-700"
+        type="email"
+        name="email"
+        id="email-input"
+        placeholder="Email address"
+      /><br />
+      <input
+        required
+        class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-3xl bg-white text-sm accent-purple-700"
+        type="password"
+        name="password"
+        id="password-input"
+        placeholder="Password"
+      />
+      <button
+        class="bg-[#693382] text-white w-full lg:w-[90%] py-2 mt-5 cursor-pointer lg:py-3 lg:text-xl hover:bg-[#542868]"
+      >
+        Login &rarr;
+      </button>
+      <p class="text-center mt-2 text-gray-500 text-sm">
+        Don't have an account?
+        <a class="text-[#693382] underline lg:font-bold" href="#">Signup</a>
+      </p>
+    </div>
+  </body>
+</html>
