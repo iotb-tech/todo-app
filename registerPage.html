@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Todo Web Application | Login and Register Page</title>
+  </head>
+  <body class="m-0 p-5 box-border bg-[#E8E8E8]">
+    <div>
+      <h2 class="text-center text-3xl font-bold">
+        Welcome, <span id="user-name"></span>
+      </h2>
+      <p class="text-gray-500 text-center mt-0 mb-5">
+        Let's help you meet up your tasks.
+      </p>
+      <form>
+        <input
+          class="p-3 my-2 w-full rounded-3xl bg-white text-sm accent-purple-700"
+          type="text"
+          name="full-name"
+          placeholder="Enter your full name"
+          id="name-input"
+        /><br />
+        <input
+          class="p-3 my-2 w-full rounded-3xl bg-white text-sm accent-purple-700"
+          type="email"
+          name="email address"
+          placeholder="Enter your email"
+          id="email-input"
+        /><br />
+        <input
+          class="p-3 my-3 w-full rounded-3xl bg-white text-sm accent-purple-700"
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          id="password-input"
+        /><br />
+        <input
+          class="p-3 my-2 w-full rounded-3xl bg-white text-sm accent-purple-700"
+          type="password"
+          name="password"
+          placeholder="Confirm password"
+          id="password-input"
+        />
+      </form>
+      <button
+        class="bg-[#693382] text-white w-full py-2 mt-5 cursor-pointer hover:bg-[#542868]"
+        type="button"
+        id="register-button"
+      >
+        Register
+      </button>
+      <p class="text-center mt-2 text-gray-500 text-sm">
+        Already have an account?
+        <a class="text-[#693382] underline" href="#">Login</a>
+      </p>
+    </div>
+  </body>
+</html>
