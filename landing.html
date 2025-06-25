@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1"/>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <title>To-do list</title>
+        <style>
+            @keyframes fadeIn {
+                0% { opacity: 0; transform: translateY(10px); }
+                100% { opacity: 1; transform: translateY(0); }
+                }
+        </style>
+        
+    </head>
+    <body clss="bg-slate-200" style=" font-family: 'Poppins', sans-serif;">
+        <nav class=" mx-5 pt-5 lg:mx-14 md:mx-14 ">
+             <img class="w-2/12 md:w-10 lg:w-10" src="./image/newest logo.webp">
+        </nav>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                <div><img class="w-11/12 drop-shadow-lg pb-10 md:w-8/12 lg: w-10/12 m-auto py-10 md:pt-10 lg:pt-10" src="./image/to do icon.webp"></div>
+            <div class="lg:m-10 md:m-10 md:py-8 pb-10 lg:py-8 text-center lg:p-4">
+                <h1 class="text-6xl text-indigo-800 md:text-6xl lg:text-7xl mt-5 font-bold mb-6 drop-shadow-2xl" style=" animation: fadeIn 4s ease-in-out forwards infinite;">Welcome to <span class="italic tracking-tight">MyTodo!</span></h1>
+                <p class="text-gray-700 text-lg mx-5 mb-9"> MyTodo helps you reclaim your time and stay focused on what matters most. Whether it's daily errands, personal goals, or big dreams — track, organize, and achieve them all with clarity and ease. Start building the life you want, one task at a time.</p>
+                <button class="bg-indigo-800 p-3 mb-9 rounded text-white hover:cursor hover:bg-indigo-600 hover:drop-shadow-xl" id="text-btn">Get started</button>
+            </div> 
+        </div>
+         <script type="text/javascript" src="script.js"></script>
+    </body>
+</html>
