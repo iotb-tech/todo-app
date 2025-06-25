@@ -23,9 +23,13 @@
     </div>
 
     <div class="tasks">
-      <h3>Tasks List</h3>
-      <div class="task-card">
+    <h3>Tasks List</h3>
+      <section class="task-card">
+        <div class="task-header">
         <h4>Daily Tasks</h4>
+        <i><img width="24" height="24" src="https://img.icons8.com/material-outlined/24/plus--v1.png" alt="plus--v1"/></i>
+        </div>
+        <div class="task-content">
         <ul>
           <li><input type="checkbox"> Learn programming by 12am</li>
           <li><input type="checkbox"> Learn how to cook by 1pm</li>
@@ -33,7 +37,8 @@
           <li><input type="checkbox"> Have lunch by 3pm</li>
           <li><input type="checkbox"> Go visit mum by 4pm</li>
         </ul>
-      </div>
+        </div>
+      </section>
     </div>
   </div>
 </body>
