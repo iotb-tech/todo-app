@@ -8,7 +8,6 @@ registerButton.addEventListener("click", () => {
   const nameInput = document.getElementById("name-input").value.trim();
   const welcomeName = document.getElementById("user-name");
   welcomeName.textContent = nameInput;
-  const emailInput = document.getElementById("email-input").value;
   const passwordInput = document.getElementById("password-input").value.trim();
   const confirmPasswordInput = document.getElementById(
     "confirm-password-input"
