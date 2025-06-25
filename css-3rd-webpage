@@ -40,7 +40,7 @@ body {
 .clock .circle {
   width: 100px;
   height: 100px;
-  border: 5px solid #d1d1ff;
+  border: 5px solid #8c8ced;
   border-radius: 50%;
   margin: 10px auto;
   position: relative;
@@ -66,17 +66,81 @@ body {
   left: 49px;
   transform: rotate(180deg);
 }
+/* To Do list that look like Mallam Hassan class */
+
+.todo-container {
+  width: 90%;
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.input-section {
+  display: flex;
+  background: #f1f1f1;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.input-section input {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+}
+
+.add-btn {
+  background-color: #8c8ced;
+  color: white;
+  border: none;
+  padding: 0 10px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 45%;
+  margin: 5px;
+}
+
+.success-msg {
+  text-align: center;
+  color: #4CAF50;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-list li {
+  background: #f9f9f9;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.actions i {
+  margin-left: 15px;
+  cursor: pointer;
+  color: #333;
+}
 
 /* Tasks */
 .tasks {
-  margin-top: 20px;
-}
-.task-header{
-  display: flex;
-  align-items: center;
-}
-i{
-  margin-left: auto;
+  margin-top: -30px;
 }
 .task-card {
   background-color: #f8f8f8;
