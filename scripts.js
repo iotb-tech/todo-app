@@ -12,6 +12,7 @@ registerButton.addEventListener("click", () => {
   const confirmPasswordInput = document.getElementById(
     "confirm-password-input"
   ).value;
+  const inputForm = document.getElementById("input-form");
 
   if (nameInput === "" || passwordInput === "" || confirmPasswordInput === "") {
     passwordErrorMssg.textContent = "All fields are required!";
@@ -29,6 +30,7 @@ registerButton.addEventListener("click", () => {
   }
 
   passwordErrorMssg.textContent = ""; // Clear any previous errors
+  inputForm.reset();
   dialogText.textContent = `Welcome, ${nameInput}! Registration successful.`;
   registerDialog.showModal();
 });
