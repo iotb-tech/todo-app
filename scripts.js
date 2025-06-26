@@ -6,21 +6,18 @@ const passwordErrorMssg = document.getElementById("error-message");
 
 registerButton.addEventListener("click", () => {
   const nameInput = document.getElementById("name-input").value.trim();
-  const welcomeName = document.getElementById("user-name");
-  welcomeName.textContent = nameInput;
   const passwordInput = document.getElementById("password-input").value.trim();
-  const confirmPasswordInput = document.getElementById(
-    "confirm-password-input"
-  ).value;
-  const inputForm = document.getElementById("input-form");
+  const confirmPasswordInput = document
+    .getElementById("confirm-password-input")
+    .value.trim();
 
-  if (nameInput === "" || passwordInput === "" || confirmPasswordInput === "") {
+  if (!nameInput || !passwordInput || !confirmPasswordInput) {
     passwordErrorMssg.textContent = "All fields are required!";
     return;
   }
 
   if (passwordInput.length < 8) {
-    passwordErrorMssg.textContent = "Password can't be less than 8 characters";
+    passwordErrorMssg.textContent = "Password can't be less than 8 characters.";
     return;
   }
 
@@ -29,9 +26,12 @@ registerButton.addEventListener("click", () => {
     return;
   }
 
-  passwordErrorMssg.textContent = ""; // Clear any previous errors
-  inputForm.reset();
+  passwordErrorMssg.textContent = ""; // Clear errors
+  localStorage.setItem("username", nameInput);
+  localStorage.setItem("password", passwordInput);
+
   dialogText.textContent = `Welcome, ${nameInput}! Registration successful.`;
+  document.getElementById("input-form").reset();
   registerDialog.showModal();
 });
 
