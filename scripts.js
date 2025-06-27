@@ -30,7 +30,7 @@ registerButton.addEventListener("click", () => {
   localStorage.setItem("username", nameInput);
   localStorage.setItem("password", passwordInput);
 
-  dialogText.textContent = `Welcome, ${nameInput}! Registration successful.`;
+  dialogText.innerHTML = `✅ <br/> Welcome, ${nameInput}! Registration successful.`;
   document.getElementById("input-form").reset();
   registerDialog.showModal();
 });

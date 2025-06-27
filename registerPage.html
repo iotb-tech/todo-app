@@ -11,11 +11,15 @@
   >
     <!-- The image on the left side -->
     <div class="flex justify-center">
-      <img src="public/to do icon.webp" alt="Main_image" class="size-[80%]" />
+      <img
+        src="public/to do icon.webp"
+        alt="Main_image"
+        class="size-[80%] lg:w-full"
+      />
     </div>
 
     <!-- The main form and buttons on the right -->
-    <div class="lg:ml-20 lg:mr-5">
+    <div class="lg:ml-20 lg:mr-5 lg:mt-5">
       <h2 class="text-center text-4xl font-bold font-sans lg:text-[3rem]">
         Welcome, <span class="text-[#693382]" id="user-name"></span>
       </h2>
@@ -62,12 +66,14 @@
           >Login</a
         >
       </p>
+
+      <!-- Dialog box -->
       <dialog
         class="bg-white text-black p-5 border-[#693382] border-2 rounded-xl absolute top-[2rem] left-[30%]"
         id="register-dialog"
       >
         <p id="register-text" class="text-center text-md mt-5 my-2"></p>
-        <button class="py-3 px-5 text-md bg-[#693382] text-white rounded-xl">
+        <button class="py-2 px-4 text-md bg-[#693382] text-white rounded-md">
           Continue
         </button>
       </dialog>
