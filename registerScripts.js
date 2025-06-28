@@ -37,4 +37,5 @@ registerButton.addEventListener("click", () => {
 
 closeDialogButton.addEventListener("click", () => {
   registerDialog.close();
+  location;
 });
