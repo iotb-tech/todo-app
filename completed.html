@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Completed Tasks</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .clear-btn {
+      background-color: #555;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.95em;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎉 Completed Tasks</h2>
+    <ul id="completed-list" class="todo-list"></ul>
+    <div style="display: flex; flex-direction: column;">
+    <button id="clear-completed" class="clear-btn">🗑️ Clear Completed Tasks</button>
+    <button id="btn-completed" onclick="window.location.href='task.html'">⬅ Back</button>
+    </div>
+  </div>
+  <script>
+    const completedList = document.getElementById('completed-list');
+    const clearBtn = document.getElementById('clear-completed');
+    const rawCompleted = JSON.parse(localStorage.getItem('completedTasks') || '[]');
+
+    const completedTasks = rawCompleted
+      .map(task => {
+        const parts = task.split("|||");
+        return {
+          text: parts[0],
+          reminderTime: new Date(parts[1])
+        };
+      })
+      .sort((a, b) => a.reminderTime - b.reminderTime);
+
+    completedTasks.forEach(task => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${task.text}</strong><br><small>Completed at: ${task.reminderTime.toLocaleString()}</small>`;
+      completedList.appendChild(li);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear all completed tasks?')) {
+        localStorage.removeItem('completedTasks');
+        completedList.innerHTML = '';
+      }
+      
+    });
+
+    
+  </script>
+</body>
+</html>

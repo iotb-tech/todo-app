@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task List Added</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .time-up {
+      font-weight: bold;
+      font-size: 1.5em;
+      animation: flash 1s infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes flash {
+      0% { color: black; }
+      50% { color: red; }
+      100% { color: black; }
+    }
+
+    .stop-btn {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      font-size: 0.9em;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="completed.html"><button>Completed Tasks</button></a>
+    <a href="loginPage.html"><button>LOG OUT</button></a>
+  </nav>
+  <div class="container">
+    <h2>Task List ✅</h2>
+    <ul id="done-list" class="todo-list"></ul>
+    <div style="display: flex; flex-direction: column;">
+   <button id="clear-btn" class="clear-btn">🗑️ Clear All Tasks</button>
+    <button id="back-btn">⬅ Back</button>
+    </div>
+  </div>
+
+  <!-- Audio Alerts -->
+  <audio id="end-sound" src="eidun-saeed.mp3" preload="auto"></audio>
+
+  <script>
+  const doneList = document.getElementById('done-list');
+  const back = document.getElementById('back-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const endSound = document.getElementById('end-sound');
+
+  let rawTasks = JSON.parse(localStorage.getItem('doneTasks') || '[]');
+
+  const tasks = rawTasks
+  .map(task => {
+    const parts = task.split("|||");
+    return {
+      text: parts[0],
+      reminderTime: new Date(parts[1]),
+      notes: parts[2] || "" // default to empty string if note is missing
+    };
+  })
+  .sort((a, b) => a.reminderTime - b.reminderTime);
+
+  function saveRemainingTasks() {
+    const updated = tasks.map(t => `${t.text}|||${t.reminderTime.toISOString()}|||${t.notes}`);
+    localStorage.setItem('doneTasks', JSON.stringify(updated));
+  }
+
+  tasks.forEach((task, index) => {
+    const li = document.createElement('li');
+    const countdown = document.createElement('div');
+    countdown.className = 'countdown';
+
+    const notesHtml = task.notes
+      ? `<div style="margin-top:5px;"><strong>📝 Notes:</strong><br><em>${task.notes}</em></div>`
+      : '';
+
+    li.innerHTML = `
+      <strong>${task.text}</strong><br>
+      <small>Reminder: ${task.reminderTime.toLocaleString()}</small>
+      ${notesHtml}
+    `;
+    li.appendChild(countdown);
+    doneList.appendChild(li);
+
+    let started = false;
+    let ended = false;
+    let stopBtn = null;
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = task.reminderTime - now;
+
+      if (diff <= 0) {
+        if (!ended) {
+          countdown.textContent = '⏰ Time Up!!!';
+          countdown.classList.add('time-up');
+
+          if (!started) {
+            started = true;
+          }
+
+          endSound.play();
+          ended = true;
+          // Create stop button
+          stopBtn = document.createElement('button');
+          stopBtn.textContent = '🔇 Stop Sound';
+          stopBtn.className = 'stop-btn';
+          stopBtn.onclick = () => {
+  endSound.pause();
+  endSound.currentTime = 0;
+
+  const completedTasks = JSON.parse(localStorage.getItem('completedTasks') || '[]');
+  completedTasks.push(`${task.text}|||${task.reminderTime.toISOString()}|||${task.notes}`);
+  localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+
+  tasks.splice(index, 1); // Remove from current task list
+  saveRemainingTasks();
+  location.reload(); // Refresh to re-render the kini..
+};
+          
+          li.appendChild(stopBtn);
+        }
+      } else {
+        const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+        const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+        const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        countdown.textContent = `⏳ ${h}:${m}:${s}`;
+      }
+
+      requestAnimationFrame(updateCountdown);
+    }
+
+    updateCountdown();
+  });
+
+  back.addEventListener('click', () => {
+    window.location.href = 'todo-list.html';
+  });
+
+  clearBtn.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear all tasks?')) {
+      localStorage.removeItem('doneTasks');
+      doneList.innerHTML = '';
+      tasks.length = 0;
+    }
+  });
+</script>
+</body>
+</html>
