@@ -14,10 +14,11 @@ loginButton.addEventListener("click", () => {
   const storedPassword = localStorage.getItem("password");
 
   if (username === storedUsername && password === storedPassword) {
-    errorMessage.textContent = "Login successful!";
-    errorMessage.style.color = "green";
+    window.location.assign("todo-list.html");
   } else {
     errorMessage.textContent = "Invalid username or password.";
     errorMessage.style.color = "red";
   }
+  document.getElementById("login-input-form").reset();
+  errorMessage.textContent = "";
 });
