@@ -75,4 +75,4 @@ Timer controls
 
 Notes management
 
-
+Alarm features
