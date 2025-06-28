@@ -7,7 +7,7 @@
     <title>Todo Web Application | Login Page</title>
   </head>
   <body
-    class="m-0 p-5 pt-0 box-border bg-[#E8E8E8] lg:grid lg:grid-cols-2 lg:pt-10"
+    class="m-0 p-5 pt-0 box-border bg-[#E8E8E8] lg:grid lg:grid-cols-2 lg:pt-10 overflow-hidden"
   >
     <div class="flex justify-center">
       <img src="public/login image.png" alt="Login image" />
@@ -25,6 +25,7 @@
         id="user-name"
         placeholder="User Name"
       /><br />
+
       <input
         required
         class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
@@ -33,7 +34,7 @@
         id="password-input"
         placeholder="Password"
       />
-      <p id="login-error-message" class="ml-2 text-sm text-red-500"></p>
+      <p id="login-error-message" class="ml-2 mt-2 text-sm text-red-500"></p>
       <button
         id="login-button"
         class="bg-[#693382] text-white w-full lg:w-[90%] py-2 mt-5 cursor-pointer lg:py-3 lg:text-xl hover:bg-[#542868]"
