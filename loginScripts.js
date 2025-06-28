@@ -7,6 +7,7 @@ loginButton.addEventListener("click", () => {
 
   if (!username || !password) {
     errorMessage.textContent = "All fields are necessary!";
+    return;
   }
 
   const storedUsername = localStorage.getItem("username");
