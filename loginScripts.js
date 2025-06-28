@@ -20,5 +20,4 @@ loginButton.addEventListener("click", () => {
     errorMessage.style.color = "red";
   }
   document.getElementById("login-input-form").reset();
-  errorMessage.textContent = "";
 });
