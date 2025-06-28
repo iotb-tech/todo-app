@@ -1,89 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Daily Task App</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .countdown {
-      font-size: 0.9em;
-      color: darkgreen;
-      margin-top: 5px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <nav>
-      <a href="task.html"><button>TASK LISTS</button></a>
-      <a href="loginPage.html"><button>LOG OUT</button></a>
-    </nav>
-    <div class="header">
-      <h2>Hello, <span class="Username"></span></h2>
-    </div>
-
-    <div class="todo-container">
-      <h2 class="title">ToDo List <i class="fa-regular fa-clipboard"></i></h2>
-
-      <div class="input-section">
-        <input id="todo-input" type="text" placeholder="Add your Tasks" />
-        <input id="hour-input" type="number" placeholder="Hour:" min="0" max="23" style="width:20px;" />
-        <input id="minute-input" type="number" placeholder="Minute:" min="0" max="59" style="width:20px; margin-left: -40px;" />
-        <button id="add-btn" class="add-btn" style="margin-right: auto;"><i class="fa-solid fa-plus"></i></button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Task App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .countdown {
+        font-size: 0.9em;
+        color: darkgreen;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <a href="task.html"><button>TASK LISTS</button></a>
+        <a href="login.html"
+          ><button onclick="localStorage.removeItem('username');">LOGOUT</button></a
+        >
+      </nav>
+      <div class="header">
+        <h2>Hello, <span id="username" class="Username"></span></h2>
       </div>
 
-      <p id="success-msg" class="success-msg" style="display:none">Todo item Updated Successfully!</p>
-      <ul id="todo-list" class="todo-list"></ul>
-      <button id="done-all-btn" class="done-all-btn">DONE</button>
+      <div class="todo-container">
+        <h2 class="title">ToDo List <i class="fa-regular fa-clipboard"></i></h2>
+
+        <div class="input-section">
+          <input id="todo-input" type="text" placeholder="Add your Tasks" />
+          <input
+            id="hour-input"
+            type="number"
+            placeholder="Hour:"
+            min="0"
+            max="23"
+            style="width: 20px"
+          />
+          <input
+            id="minute-input"
+            type="number"
+            placeholder="Minute:"
+            min="0"
+            max="59"
+            style="width: 20px; margin-left: -40px"
+          />
+          <button id="add-btn" class="add-btn" style="margin-right: auto">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <p id="success-msg" class="success-msg" style="display: none">
+          Todo item Updated Successfully!
+        </p>
+        <ul id="todo-list" class="todo-list"></ul>
+        <button id="done-all-btn" class="done-all-btn">DONE</button>
+      </div>
     </div>
-  </div>
 
-  <script>
-  const input = document.getElementById('todo-input');
-  const hourInput = document.getElementById('hour-input');
-  const minuteInput = document.getElementById('minute-input');
-  const addBtn = document.getElementById('add-btn');
-  const list = document.getElementById('todo-list');
-  const msg = document.getElementById('success-msg');
-  const doneAllBtn = document.getElementById('done-all-btn');
+    <script>
+      const input = document.getElementById('todo-input');
+      const hourInput = document.getElementById('hour-input');
+      const minuteInput = document.getElementById('minute-input');
+      const addBtn = document.getElementById('add-btn');
+      const list = document.getElementById('todo-list');
+      const msg = document.getElementById('success-msg');
+      const doneAllBtn = document.getElementById('done-all-btn');
+      const username = document.getElementById('username');
 
-  let editMode = false, editItem = null;
+      const storedUsername = localStorage.getItem('username');
+      if (storedUsername) {
+        username.textContent = storedUsername.toUpperCase() + ' 👋';
+      } else {
+        alert('Please log in first!');
+        window.location.href = 'login.html';
+      }
 
-  addBtn.addEventListener('click', addOrUpdate);
-  input.addEventListener('keypress', e => e.key === 'Enter' && addOrUpdate());
+      let editMode = false,
+        editItem = null;
 
-  function addOrUpdate() {
-    const text = input.value.trim();
-    const hour = hourInput.value;
-    const minute = minuteInput.value;
+      addBtn.addEventListener('click', addOrUpdate);
+      input.addEventListener('keypress', (e) => e.key === 'Enter' && addOrUpdate());
 
-    if (!text) return alert('Please enter a task');
-    if (hour === "" || minute === "" || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
-      return alert('Please enter a valid time (Hour:Minute)');
-    }
+      function addOrUpdate() {
+        const text = input.value.trim();
+        const hour = hourInput.value;
+        const minute = minuteInput.value;
 
-    const time = new Date();
-    time.setHours(hour, minute, 0, 0);
+        if (!text) return alert('Please enter a task');
+        if (hour === '' || minute === '' || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+          return alert('Please enter a valid time (Hour:Minute)');
+        }
 
-    if (editMode) {
-      editItem.querySelector('span').textContent = text;
-      editItem.dataset.time = time.toISOString();
-      editItem.querySelector('.time-display').textContent = `Reminder: ${time.toLocaleTimeString()}`;
-      editItem.querySelector('.countdown').textContent = '';
-      editMode = false;
-      editItem = null;
-    } else {
-      const li = document.createElement('li');
-      li.dataset.time = time.toISOString();
+        const time = new Date();
+        time.setHours(hour, minute, 0, 0);
 
-      const noteArea = document.createElement('textarea');
-      noteArea.placeholder = "📝 Add notes about this task...";
-      noteArea.className = "task-note";
-      noteArea.style = "width: 100%; margin-top: 5px; padding: 4px;";
+        if (editMode) {
+          editItem.querySelector('span').textContent = text;
+          editItem.dataset.time = time.toISOString();
+          editItem.querySelector(
+            '.time-display',
+          ).textContent = `Reminder: ${time.toLocaleTimeString()}`;
+          editItem.querySelector('.countdown').textContent = '';
+          editMode = false;
+          editItem = null;
+        } else {
+          const li = document.createElement('li');
+          li.dataset.time = time.toISOString();
 
-      li.innerHTML = `
+          const noteArea = document.createElement('textarea');
+          noteArea.placeholder = '📝 Add notes about this task...';
+          noteArea.className = 'task-note';
+          noteArea.style = 'width: 100%; margin-top: 5px; padding: 4px;';
+
+          li.innerHTML = `
         <span>${text}</span><br>
         <small class="time-display">Reminder: ${time.toLocaleTimeString()}</small>
         <div class="countdown"></div>
@@ -92,73 +127,75 @@
           <i class="fa-solid fa-trash-can delete"></i>
         </div>
       `;
-      li.appendChild(noteArea);
-      list.appendChild(li);
+          li.appendChild(noteArea);
+          list.appendChild(li);
 
-      li.querySelector('.edit').addEventListener('click', () => {
-        input.value = li.querySelector('span').textContent;
-        const t = new Date(li.dataset.time);
-        hourInput.value = t.getHours();
-        minuteInput.value = t.getMinutes();
-        editMode = true;
-        editItem = li;
-      });
+          li.querySelector('.edit').addEventListener('click', () => {
+            input.value = li.querySelector('span').textContent;
+            const t = new Date(li.dataset.time);
+            hourInput.value = t.getHours();
+            minuteInput.value = t.getMinutes();
+            editMode = true;
+            editItem = li;
+          });
 
-      li.querySelector('.delete').addEventListener('click', () => li.remove());
-    }
+          li.querySelector('.delete').addEventListener('click', () => li.remove());
+        }
 
-    input.value = '';
-    hourInput.value = '';
-    minuteInput.value = '';
-    msg.style.display = 'block';
-    setTimeout(() => msg.style.display = 'none', 1500);
-  }
-
-  // Real-time countdown logic
-  setInterval(() => {
-    const tasks = list.querySelectorAll('li');
-    tasks.forEach(li => {
-      const time = new Date(li.dataset.time);
-      const now = new Date();
-      const diff = time - now;
-
-      const countdownDiv = li.querySelector('.countdown');
-      if (diff <= 0) {
-        const elapsed = Math.abs(diff);
-        const hours = Math.floor(elapsed / (1000 * 60 * 60));
-        const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-        countdownDiv.textContent = `⏳ Countdown: ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-      } else {
-        countdownDiv.textContent = '';
+        input.value = '';
+        hourInput.value = '';
+        minuteInput.value = '';
+        msg.style.display = 'block';
+        setTimeout(() => (msg.style.display = 'none'), 1500);
       }
-    });
-  }, 1000);
 
-  function pad(n) {
-    return n < 10 ? '0' + n : n;
-  }
+      // Real-time countdown logic
+      setInterval(() => {
+        const tasks = list.querySelectorAll('li');
+        tasks.forEach((li) => {
+          const time = new Date(li.dataset.time);
+          const now = new Date();
+          const diff = time - now;
 
-  doneAllBtn.addEventListener('click', () => {
-    const newTasks = Array.from(list.querySelectorAll('li')).map(li => {
-      const text = li.querySelector('span').textContent;
-      const time = li.dataset.time;
-      const notes = li.querySelector('textarea').value || "";
-      return `${text}|||${time}|||${notes}`;
-    });
+          const countdownDiv = li.querySelector('.countdown');
+          if (diff <= 0) {
+            const elapsed = Math.abs(diff);
+            const hours = Math.floor(elapsed / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+            countdownDiv.textContent = `⏳ Countdown: ${pad(hours)}h ${pad(minutes)}m ${pad(
+              seconds,
+            )}s`;
+          } else {
+            countdownDiv.textContent = '';
+          }
+        });
+      }, 1000);
 
-    if (newTasks.length === 0) {
-      alert("No tasks to mark as done!");
-      return;
-    }
+      function pad(n) {
+        return n < 10 ? '0' + n : n;
+      }
 
-    const existing = JSON.parse(localStorage.getItem('doneTasks') || '[]');
-    const merged = existing.concat(newTasks);
-    localStorage.setItem('doneTasks', JSON.stringify(merged));
+      doneAllBtn.addEventListener('click', () => {
+        const newTasks = Array.from(list.querySelectorAll('li')).map((li) => {
+          const text = li.querySelector('span').textContent;
+          const time = li.dataset.time;
+          const notes = li.querySelector('textarea').value || '';
+          return `${text}|||${time}|||${notes}`;
+        });
 
-    list.innerHTML = '';
-    window.location.href = 'task.html';
-  });
-</script>
-</body>
+        if (newTasks.length === 0) {
+          alert('No tasks to mark as done!');
+          return;
+        }
+
+        const existing = JSON.parse(localStorage.getItem('doneTasks') || '[]');
+        const merged = existing.concat(newTasks);
+        localStorage.setItem('doneTasks', JSON.stringify(merged));
+
+        list.innerHTML = '';
+        window.location.href = 'task.html';
+      });
+    </script>
+  </body>
 </html>
