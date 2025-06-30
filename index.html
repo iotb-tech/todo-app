@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>To-do list</title>
+    <style>
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-slate-200" style="font-family: 'Poppins', sans-serif; background-color: #e8e8e8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+      <div>
+        <img
+          class="w-11/12 drop-shadow-lg pb-10 md:w-8/12 lg: w-10/12 m-auto py-10 md:pt-10 lg:pt-10"
+          src="./image/to do icon.webp"
+        />
+      </div>
+      <div class="lg:m-10 md:m-10 md:py-8 pb-10 lg:py-8 text-center lg:p-4">
+        <h1
+          class="text-6xl md:text-6xl lg:text-7xl mt-5 font-bold mb-6 drop-shadow-2xl"
+          style="animation: fadeIn 4s ease-in-out forwards infinite; color: #693382"
+        >
+          Welcome to <span class="italic tracking-tight">MyTodo!</span>
+        </h1>
+        <p class="text-gray-700 text-lg mx-5 mb-9">
+          MyTodo helps you reclaim your time and stay focused on what matters most. Whether it's
+          daily errands, personal goals, or big dreams — track, organize, and achieve them all with
+          clarity and ease. Start building the life you want, one task at a time.
+        </p>
+        <button
+          class="p-3 mb-9 rounded text-white hover:cursor hover:bg-indigo-800 hover:drop-shadow-xl transition duration-200"
+          id="text-btn"
+          style="background-color: #693382"
+        >
+          Get started
+        </button>
+        <dialog
+          class="rounded-md divide-slate-900 border-4 p-4 mb-3 bg-gradient-to-r from-purple-500 via-purple-400 to-purple-500"
+        >
+          <p class="text-white p-5 text-bold italic">Are You a new user?</p>
+          <div class="space-x-4">
+            <button
+              class="p-2 rounded text-white hover:bg-indigo-800 bg-indigo-50 hover:cursor hover:drop-shadow-xl"
+              id="btn-yes"
+              style="background-color: #693382"
+            >
+              Yes
+            </button>
+            <button
+              class="p-2 rounded text-white hover:bg-indigo-800 bg-indigo-50 hover:cursor hover:drop-shadow-xl"
+              id="btn-no"
+              style="background-color: #693382"
+            >
+              No
+            </button>
+          </div>
+        </dialog>
+      </div>
+    </div>
+    <section class="py-16 px-6 max-w-6xl mx-auto bg-white rounded">
+      <h2 class="text-3xl font-semibold text-center mb-10" style="color: #693382">Why MyToDo?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="bg-white p-6 rounded shadow hover:shadow-2xl transition">
+          <h3 class="text-xl font-semibold mb-2" style="color: #693382">📝 Create Tasks</h3>
+          <p class="text-gray-600">Quickly jot down tasks and stay on top of your to-do list.</p>
+        </div>
+        <div class="bg-white p-6 rounded shadow hover:shadow-2xl transition">
+          <h3 class="text-xl font-semibold mb-2" style="color: #693382">📒 Note Progress</h3>
+          <p class="text-gray-600">Write reflections and track your accomplishments daily.</p>
+        </div>
+        <div class="bg-white p-6 rounded shadow hover:shadow-2xl transition">
+          <h3 class="text-xl font-semibold mb-2" style="color: #693382">⏱️ Use Timer</h3>
+          <p class="text-gray-600">
+            Boost your focus with a built-in timer to manage time effectively.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-white" style="background-color: #693382">
+      &copy; 2025 MyToDo | <a href="#" class="underline hover:text-black">Privacy Policy</a> |
+      <a href="#" class="underline hover:text-black">Contact Us</a> |
+      <a href="#" class="underline hover:text-black">Web weavers</a>
+    </footer>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

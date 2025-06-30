@@ -35,22 +35,40 @@
           placeholder="Enter your name"
           id="name-input"
         /><br />
-        <input
-          required
-          class="p-3 my-3 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
-          type="password"
-          name="password"
-          placeholder="Create a password"
-          id="password-input"
-        /><br />
-        <input
-          required
-          class="p-3 mt-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
-          type="password"
-          name="password"
-          placeholder="Confirm password"
-          id="confirm-password-input"
-        />
+
+        <div class="flex items-center relative" id="password-container">
+          <input
+            required
+            class="p-3 my-3 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
+            type="password"
+            name="password"
+            placeholder="Create a password"
+            id="password-input"
+          />
+          <span
+            class="absolute right-3 cursor-pointer lg:right-17 xl:right-22 2xl:right-29"
+            id="toggle-password-visibility"
+            >🔒</span
+          ><br />
+        </div>
+
+        <div class="flex items-center relative" id="password-container">
+          <input
+            required
+            class="p-3 mt-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
+            type="password"
+            name="password"
+            placeholder="Confirm password"
+            id="confirm-password-input"
+          />
+          <span
+            class="absolute right-3 cursor-pointer lg:right-17 xl:right-22 2xl:right-29"
+            id="toggle-confirmPassword-visibility"
+            >🔒</span
+          >
+          <br />
+        </div>
+
         <p class="text-sm text-red-500" id="error-message"></p>
       </form>
       <button
@@ -69,7 +87,7 @@
 
       <!-- Dialog box -->
       <dialog
-        class="bg-white text-black p-5 border-[#693382] border-2 rounded-xl absolute top-[2rem] left-[30%]"
+        class="bg-white text-black p-4 border-[#693382] border-1 rounded-xl absolute top-[2rem] left-[30%]"
         id="register-dialog"
       >
         <p id="register-text" class="text-center text-md mt-5 my-2"></p>
@@ -78,6 +96,6 @@
         </button>
       </dialog>
     </div>
-    <script src="scripts.js"></script>
+    <script src="registerScripts.js"></script>
   </body>
 </html>

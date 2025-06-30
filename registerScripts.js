@@ -3,6 +3,32 @@ const registerDialog = document.getElementById("register-dialog");
 const dialogText = document.getElementById("register-text");
 const closeDialogButton = document.querySelector("#register-dialog button");
 const passwordErrorMssg = document.getElementById("error-message");
+const passwordToggler = document.getElementById("toggle-password-visibility");
+const password = document.getElementById("password-input");
+const confirmPassword = document.getElementById("confirm-password-input");
+const confirmPasswordToggler = document.getElementById(
+  "toggle-confirmPassword-visibility"
+);
+
+passwordToggler.addEventListener("click", () => {
+  if (password.type === "password") {
+    password.type = "text";
+    passwordToggler.textContent = "👁️";
+  } else {
+    password.type = "password";
+    passwordToggler.textContent = "🔒";
+  }
+});
+
+confirmPasswordToggler.addEventListener("click", () => {
+  if (confirmPassword.type === "password") {
+    confirmPassword.type = "text";
+    confirmPasswordToggler.textContent = "👁️";
+  } else {
+    confirmPassword.type = "password";
+    confirmPasswordToggler.textContent = "🔒";
+  }
+});
 
 registerButton.addEventListener("click", () => {
   const nameInput = document.getElementById("name-input").value.trim();
@@ -37,5 +63,5 @@ registerButton.addEventListener("click", () => {
 
 closeDialogButton.addEventListener("click", () => {
   registerDialog.close();
-  location;
+  window.location.href = "todo-list.html";
 });

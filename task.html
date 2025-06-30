@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task List Added</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .time-up {
+        font-weight: bold;
+        font-size: 1.5em;
+        animation: flash 1s infinite;
+        margin-bottom: 10px;
+      }
+
+      @keyframes flash {
+        0% {
+          color: black;
+        }
+        50% {
+          color: red;
+        }
+        100% {
+          color: black;
+        }
+      }
+
+      .stop-btn {
+        background-color: crimson;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        font-size: 0.9em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="completed.html"><button>Completed Tasks</button></a>
+      <a href="login.html"
+        ><button onclick="localStorage.removeItem('username');">LOGOUT</button></a
+      >
+    </nav>
+    <div class="container">
+      <h2>Task List ✅</h2>
+      <ul id="done-list" class="todo-list"></ul>
+      <div style="display: flex; flex-direction: column">
+        <button id="clear-btn" class="clear-btn">🗑️ Clear All Tasks</button>
+        <button id="back-btn">⬅ Back</button>
+      </div>
+    </div>
+
+    <!-- Audio Alerts -->
+    <audio id="end-sound" src="eidun-saeed.mp3" preload="auto"></audio>
+
+    <script>
+      const doneList = document.getElementById('done-list');
+      const clearBtn = document.getElementById('clear-btn');
+      const back = document.getElementById('back-btn');
+      const endSound = document.getElementById('end-sound');
+      const storedUsername = localStorage.getItem('username');
+      if (!storedUsername) {
+        alert('Please log in first!');
+        window.location.href = 'login.html';
+      }
+
+      let rawTasks = JSON.parse(localStorage.getItem('doneTasks') || '[]');
+
+      let tasks = rawTasks
+        .map((task) => {
+          const [text, timeISO, notes] = task.split('|||');
+          return { text, reminderTime: new Date(timeISO), notes };
+        })
+        .sort((a, b) => a.reminderTime - b.reminderTime);
+
+      function saveTasks() {
+        const arr = tasks.map((t) => `${t.text}|||${t.reminderTime.toISOString()}|||${t.notes}`);
+        localStorage.setItem('doneTasks', JSON.stringify(arr));
+      }
+
+      function renderList() {
+        doneList.innerHTML = '';
+        tasks.forEach((task, i) => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+              <strong>${task.text}</strong>
+              <span class="delete-icon" style="cursor:pointer;color:red;font-size:1.2em;">🗑️</span>
+            </div>
+            <small>Reminder: ${task.reminderTime.toLocaleString()}</small>
+      ${
+        task.notes
+          ? `<div style="margin-top:5px;"><strong>📝 Notes:</strong><br><em>${task.notes}</em></div>`
+          : ''
+      }
+      <div class="countdown"></div>
+    `;
+          doneList.appendChild(li);
+
+          li.querySelector('.delete-icon').addEventListener('click', () => {
+            if (confirm('Delete this task?')) {
+              tasks = tasks.filter((_, idx) => idx !== i);
+              saveTasks();
+              renderList();
+            }
+          });
+
+          // Countdown remains same...
+          const countdown = li.querySelector('.countdown');
+          let started = false,
+            ended = false,
+            stopBtn = null;
+
+          (function updateCount() {
+            const diff = task.reminderTime - new Date();
+            if (diff <= 0 && !ended) {
+              countdown.textContent = '⏰ Time Up!!!';
+              countdown.classList.add('time-up');
+              endSound.play();
+              ended = true;
+
+              stopBtn = document.createElement('button');
+              stopBtn.textContent = '🔇 Stop Sound';
+              stopBtn.className = 'stop-btn';
+              stopBtn.onclick = () => {
+                endSound.pause();
+                endSound.currentTime = 0;
+                const completed = JSON.parse(localStorage.getItem('completedTasks') || '[]');
+                completed.push(`${task.text}|||${task.reminderTime.toISOString()}|||${task.notes}`);
+                localStorage.setItem('completedTasks', JSON.stringify(completed));
+                tasks.splice(i, 1);
+                saveTasks();
+                location.reload();
+              };
+              li.appendChild(stopBtn);
+            } else if (diff > 0) {
+              const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+              const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+              const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+              countdown.textContent = `⏳ ${h}:${m}:${s}`;
+            }
+            if (!ended) requestAnimationFrame(updateCount);
+          })();
+        });
+      }
+
+      window.onload = renderList;
+
+      clearBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to clear all tasks?')) {
+          localStorage.removeItem('doneTasks');
+          tasks = [];
+          renderList();
+        }
+      });
+
+      back.addEventListener('click', () => (window.location.href = 'todo-list.html'));
+    </script>
+  </body>
+</html>

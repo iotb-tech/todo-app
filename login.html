@@ -25,14 +25,22 @@
           id="user-name"
           placeholder="User Name"
         /><br />
-        <input
-          required
-          class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
-          type="password"
-          name="password"
-          id="password-input"
-          placeholder="Password"
-        />
+
+        <div class="flex items-center relative" id="password-container">
+          <input
+            required
+            class="p-3 my-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
+            type="password"
+            name="password"
+            id="password-input"
+            placeholder="Password"
+          />
+          <span
+            class="absolute right-3 cursor-pointer lg:right-17 xl:right-22 2xl:right-29"
+            id="toggle-password-visibility"
+            >🔒</span
+          >
+        </div>
       </form>
       <p id="login-error-message" class="ml-2 mt-2 text-sm text-red-500"></p>
       <button
@@ -48,6 +56,12 @@
         >
       </p>
     </div>
+    <script>
+      const storedUsername = localStorage.getItem("username");
+      if (storedUsername) {
+        window.location.href = "todo-list.html";
+      }
+    </script>
     <script src="loginScripts.js"></script>
   </body>
 </html>
