@@ -11,7 +11,11 @@
   >
     <!-- The image on the left side -->
     <div class="flex justify-center">
-      <img src="public/to do icon.webp" alt="Main_image" class="size-[80%] lg:w-full" />
+      <img
+        src="public/to do icon.webp"
+        alt="Main_image"
+        class="size-[80%] lg:w-full"
+      />
     </div>
 
     <!-- The main form and buttons on the right -->
@@ -19,7 +23,9 @@
       <h2 class="text-center text-4xl font-bold font-sans lg:text-[3rem]">
         Welcome, <span class="text-[#693382]" id="user-name"></span>
       </h2>
-      <p class="text-gray-500 text-center mt-0 mb-5">Let's help you meet up your tasks.</p>
+      <p class="text-gray-500 text-center mt-0 mb-5">
+        Let's help you meet up your tasks.
+      </p>
       <form id="input-form">
         <input
           required
@@ -29,22 +35,40 @@
           placeholder="Enter your name"
           id="name-input"
         /><br />
-        <input
-          required
-          class="p-3 my-3 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
-          type="password"
-          name="password"
-          placeholder="Create a password"
-          id="password-input"
-        /><br />
-        <input
-          required
-          class="p-3 mt-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
-          type="password"
-          name="password"
-          placeholder="Confirm password"
-          id="confirm-password-input"
-        />
+
+        <div class="flex items-center relative" id="password-container">
+          <input
+            required
+            class="p-3 my-3 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
+            type="password"
+            name="password"
+            placeholder="Create a password"
+            id="password-input"
+          />
+          <span
+            class="absolute right-3 cursor-pointer lg:right-17"
+            id="toggle-password-visibility"
+            >🔒</span
+          ><br />
+        </div>
+
+        <div class="flex items-center relative" id="password-container">
+          <input
+            required
+            class="p-3 mt-2 w-full lg:my-3 lg:w-[90%] rounded-xl bg-white text-sm accent-purple-700 shadow-lg"
+            type="password"
+            name="password"
+            placeholder="Confirm password"
+            id="confirm-password-input"
+          />
+          <span
+            class="absolute right-3 cursor-pointer lg:right-17"
+            id="toggle-confirmPassword-visibility"
+            >🔒</span
+          >
+          <br />
+        </div>
+
         <p class="text-sm text-red-500" id="error-message"></p>
       </form>
       <button
@@ -56,16 +80,20 @@
       </button>
       <p class="text-center mt-2 text-gray-500 text-sm">
         Already have an account?
-        <a class="text-[#693382] underline lg:font-bold" href="login.html">Login</a>
+        <a class="text-[#693382] underline lg:font-bold" href="login.html"
+          >Login</a
+        >
       </p>
 
       <!-- Dialog box -->
       <dialog
-        class="bg-white text-black p-5 border-[#693382] border-2 rounded-xl absolute top-[2rem] left-[30%]"
+        class="bg-white text-black p-4 border-[#693382] border-1 rounded-xl absolute top-[2rem] left-[30%]"
         id="register-dialog"
       >
         <p id="register-text" class="text-center text-md mt-5 my-2"></p>
-        <button class="py-2 px-4 text-md bg-[#693382] text-white rounded-md">Continue</button>
+        <button class="py-2 px-4 text-md bg-[#693382] text-white rounded-md">
+          Continue
+        </button>
       </dialog>
     </div>
     <script src="registerScripts.js"></script>
