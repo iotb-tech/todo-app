@@ -1,5 +1,17 @@
 const errorMessage = document.getElementById("login-error-message");
 const loginButton = document.getElementById("login-button");
+const passwordToggler = document.getElementById("toggle-password-visibility");
+const passwordInput = document.getElementById("password-input");
+
+passwordToggler.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    passwordToggler.textContent = "👁️";
+  } else {
+    passwordInput.type = "password";
+    passwordToggler.textContent = "🔒";
+  }
+});
 
 loginButton.addEventListener("click", () => {
   const username = document.getElementById("user-name").value.trim();
