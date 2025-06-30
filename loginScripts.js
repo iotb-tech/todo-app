@@ -1,23 +1,23 @@
-const errorMessage = document.getElementById('login-error-message');
-const loginButton = document.getElementById('login-button');
+const errorMessage = document.getElementById("login-error-message");
+const loginButton = document.getElementById("login-button");
 
-loginButton.addEventListener('click', () => {
-  const username = document.getElementById('user-name').value.trim();
-  const password = document.getElementById('password-input').value.trim();
+loginButton.addEventListener("click", () => {
+  const username = document.getElementById("user-name").value.trim();
+  const password = document.getElementById("password-input").value.trim();
 
   if (!username || !password) {
-    errorMessage.textContent = 'All fields are necessary!';
+    errorMessage.textContent = "All fields are necessary!";
     return;
   }
 
-  const storedUsername = localStorage.getItem('username');
-  const storedPassword = localStorage.getItem('password');
+  const storedUsername = localStorage.getItem("username");
+  const storedPassword = localStorage.getItem("password");
 
   if (username === storedUsername && password === storedPassword) {
-    window.location.assign('todo-list.html');
+    window.location.assign("todo-list.html");
   } else {
-    errorMessage.textContent = 'Invalid username or password.';
-    errorMessage.style.color = 'red';
+    errorMessage.textContent = "Invalid username or password.";
+    errorMessage.style.color = "red";
   }
-  document.getElementById('login-input-form').reset();
+  document.getElementById("login-input-form").reset();
 });

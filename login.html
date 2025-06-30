@@ -13,7 +13,9 @@
       <img src="public/login image.png" alt="Login image" />
     </div>
     <div class="lg:ml-20 lg:mr-5 lg:mt-24">
-      <h2 class="text-center text-4xl mb-3 font-bold font-sans lg:text-[3rem]">Welcome Back!</h2>
+      <h2 class="text-center text-4xl mb-3 font-bold font-sans lg:text-[3rem]">
+        Welcome Back!
+      </h2>
       <form id="login-input-form">
         <input
           required
@@ -41,13 +43,15 @@
       </button>
       <p class="text-center mt-2 text-gray-500 text-sm">
         Don't have an account?
-        <a class="text-[#693382] underline lg:font-bold" href="register.html">Signup</a>
+        <a class="text-[#693382] underline lg:font-bold" href="register.html"
+          >Signup</a
+        >
       </p>
     </div>
     <script>
-      const storedUsername = localStorage.getItem('username');
+      const storedUsername = localStorage.getItem("username");
       if (storedUsername) {
-        window.location.href = 'todo-list.html';
+        window.location.href = "todo-list.html";
       }
     </script>
     <script src="loginScripts.js"></script>
