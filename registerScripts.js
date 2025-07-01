@@ -16,7 +16,7 @@ passwordToggler.addEventListener("click", () => {
     passwordToggler.textContent = "👁️";
   } else {
     password.type = "password";
-    passwordToggler.textContent = "🔒";
+    passwordToggler.textContent = "👁️‍🗨️";
   }
 });
 
@@ -26,7 +26,7 @@ confirmPasswordToggler.addEventListener("click", () => {
     confirmPasswordToggler.textContent = "👁️";
   } else {
     confirmPassword.type = "password";
-    confirmPasswordToggler.textContent = "🔒";
+    confirmPasswordToggler.textContent = "👁️‍🗨️";
   }
 });
 
