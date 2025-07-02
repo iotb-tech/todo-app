@@ -9,7 +9,7 @@ passwordToggler.addEventListener("click", () => {
     passwordToggler.textContent = "👁️";
   } else {
     passwordInput.type = "password";
-    passwordToggler.textContent = "🔒";
+    passwordToggler.textContent = "👁️‍🗨️";
   }
 });
 
